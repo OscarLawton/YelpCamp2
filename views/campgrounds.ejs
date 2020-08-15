@@ -1,15 +1,33 @@
 <%- include("partials/header") %>
+    
+    <div class="container">
+        <header class="jumbotron">
+            <div class="container">
+                <h1>Welcome To Yelpcamp!</h1>
+                <p>View our handpicked campgrounds</p>
+                <p>
+                    <a class="btn btn-primary btn-large" href="/campgrounds/new">Add New Campground</a>
+                </p>
+            </div>
+           
+        </header>
+        
+            <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+                <% for(var i=0; i<campgrounds.length; i++) { %>
 
-<h1>Campgrounds Page</h1>
-
-<a href="/campgrounds/new">Add New Campgrounds</a>
-
-<% for(var i=0; i<campgrounds.length; i++) { %>
-        <div>
-            <h4> <%=  campgrounds[i].name  %>  </h4>
-            <img src="<%= campgrounds[i].image %>" >  
-        </div>
-         
-<% } %> 
+                    <div class="col-md-3 col-sm-6">
+                        
+                        <div class="thumbnail">
+                            <img src="<%= campgrounds[i].image %>"></img>
+                            <div class="caption">
+                                <h4> <%=  campgrounds[i].name  %>  </h4>
+                            </div>
+                        </div>
+                          
+                    </div>
+                
+                <% } %> 
+            </div>
+    </div> 
 
 <%- include("partials/footer") %>
