@@ -23,13 +23,15 @@ var campgroundSchema = new mong.Schema({
 });
 
 var Campground = mong.model("Campground", campgroundSchema);
-
-/* Campground.create(
+/* 
+Campground.create(
     {
         name: "Salmon Creek", 
         image:"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fweknowyourdreams.com%2Fimages%2Fcamping%2Fcamping-08.jpg&f=1&nofb=1"
     }
-).then((campground) => console.log("You just created a campground!!!", campground)).catch((err) => console.log()); */
+).then((campground) => console.log("You just created a campground!!!", campground)).catch((err) => console.log()); 
+ */
+
 /* var campgrounds = [
     {name: "Salmon Creek", image:"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fweknowyourdreams.com%2Fimages%2Fcamping%2Fcamping-08.jpg&f=1&nofb=1"},
     {name: "Granite", image: "https://andrewmurrayauthor.files.wordpress.com/2015/08/wupperman-campground-near-lake-city-colorado-photo-by-mary-carkin-lake-city-switchbacks.jpg"},
@@ -49,8 +51,9 @@ app.get('/', function(req, res){
 //<%- include("partials/header") %>
 //<%- include("partials/footer") %>
 app.get('/campgrounds', (req, res) => {
+    console.log("you hit the campgrounds page")
     Campground.find({}).then(
-        (allTheCampgrounds) => res.render("campgrounds", {campgrounds: allTheCampgrounds})
+        (allTheCampgrounds) => res.render("index", {campgrounds: allTheCampgrounds})
     ).catch(
         (err) => console.log("There was an error", err)
     )
@@ -70,6 +73,16 @@ app.post('/campgrounds', (req, res) => {
 
 app.get("/campgrounds/new", (req, res) => {
     res.render("new.ejs");
+});
+
+app.get("/campgrounds/:id", (req, res) => {
+    
+    Campground.findById(req.params.id).then(
+        (campground) => res.render("show",{campground: campground})
+    ).catch(
+        (err) => res.send("something went wrong!!!") 
+    )
+    
 });
 
 app.listen(3000, function(){
