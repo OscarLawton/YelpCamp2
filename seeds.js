@@ -6,12 +6,12 @@ var data = [
     {
         name: "Cloud's Rest", 
         image:'https://californiathroughmylens.com/wp-content/uploads/2017/07/clouds-rest-19-640x427.jpg',
-        description: "This place was truly amazing"
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     },
     {
         name: "Half Dome",
         image: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Half_Dome_from_Glacier_Point%2C_Yosemite_NP_-_Diliff.jpg',
-        description: 'I think this is used in Mac OS desktop background'
+        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     }
 ]
 
@@ -26,7 +26,7 @@ function seedDB(){
             Comment.create(
                 {
                     text: "This place is aweomse but I need matches",
-                    author: "greg lansky"
+                    author: "Bob Sopowski"
                 }
             ).then((comment) => {
                 campground.comments.push(comment)
