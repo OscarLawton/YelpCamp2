@@ -2,10 +2,13 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var mong = require("mongoose");
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
 var Campground = require('./models/campground');
 var Comment = require('./models/comment');
 var User = require('./models/user');
 var seedDB = require('./seeds');
+
 
 
 seedDB();
@@ -41,6 +44,20 @@ app.use(express.static(__dirname + "/public"))
 
 ]
  */
+
+// Passport Configuration
+app.use(require('express-session')({
+    secret: 'Lucky is a great cat!',
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // Landing Page
 app.get('/', function(req, res){
@@ -115,6 +132,22 @@ app.post('/campgrounds/:id/comments', (req, res) => {
         console.log("there was an error: ", err);
         res.redirect('/campgrounds')
     });
+});
+
+// Register Routes
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+
+app.post('/register', (req, res) => {
+    var newUser = new User({username: req.body.username})
+    User.register(newUser, req.body.password).then((user) => {
+        passport.authenticate('local')(req, res, function(){
+            res.redirect('/campgrounds');
+        })
+    }).catch((err) => {
+        res.render('error', {err});
+    })
 });
 
 app.listen(3000, function(){
