@@ -57,7 +57,10 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
 //===============
 // Routes
 //===============
@@ -71,6 +74,7 @@ app.get('/', function(req, res){
 
 // All Campgounds
 app.get('/campgrounds', (req, res) => {
+    var user = req.user;
     Campground.find({}).then(
         (allTheCampgrounds) => res.render("campgrounds/index", {campgrounds: allTheCampgrounds})
     ).catch(
