@@ -14,7 +14,7 @@ var commentRoutes = require('./routes/comments'),
     campgroundRoutes = require('./routes/campgrounds'),
     authRoutes = require('./routes/auth');
 
-seedDB();
+//seedDB();
 mong.connect('mongodb://localhost:27017/yelp_camp', {
   useNewUrlParser: true,
   useUnifiedTopology: true
